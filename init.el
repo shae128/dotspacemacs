@@ -310,8 +310,104 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq powerline-default-separator 'utf-8)
+  ;; (setq powerline-default-separator 'utf-8)
   (display-line-numbers-mode 't)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ORG Mode;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'org)
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-switchb)
+
+  ;; latex config
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+  (setq org-export-latex 'minted)
+  (setq org-src-fontify-natively t)
+
+  (setq org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
+
+  ;; add easy template for python language
+  (add-to-list 'org-structure-template-alist '("p" "#+BEGIN_SRC python -n :results output pp replace :exports both\n?\n#+END_SRC"))
+
+  ;; add easy template for imgae insertion
+  (add-to-list 'org-structure-template-alist '("img" "#+CAPTION: ?\n#+ATTR_LATEX: :width 330px\n[[./path/to/photo]]"))
+
+  ;; add new page easy template
+  (add-to-list 'org-structure-template-alist '("n" "#+LATEX: \\newpage\n?"))
+
+  ;; add whiteSpace easy template
+  (add-to-list 'org-structure-template-alist '("vs" "#+LATEX: \\vspace{10 mm}\n?"))
+
+
+  ;; point to python3
+  (setq org-babel-python-command "python3")
+
+  ;; stop asking confirmation for code eveluation
+  (setq org-confirm-babel-evaluate nil)
+
+  ;; enable flyspell in org-mode
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (define-key global-map "\C-o" 'flyspell-auto-correct-previous-word)
+
+  ;; to enable time stamp for TODO
+  ;; (setq org-log-done t)
+
+  ;; Change M-RET behaviour
+  (setq org-M-RET-may-split-line nil)
+
+  ;; to enable note for TODO
+  ;; (setq org-log-done 'note)
+
+  ;; Enable indention
+  (setq org-startup-indented t)
+
+  ;; enable tab on evil mode
+  (setq evil-want-C-i-jump nil)
+
+  ;; define org-mode Capture default file
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+
+  ;; define capture global key-map
+  (define-key global-map "\C-cc" 'org-capture)
+
+  ;; Disable the splash screen (to enable it agin, replace the t with 0)
+  (setq inhibit-splash-screen t)
+
+
+  ;; defin todo and daily  template
+  ;; (setq org-capture-templates
+  ;;       '(("t" "Todo" entry (file+headline "~/.org/gtd.org" "Tasks")
+  ;; 	 "* TODO %?\n %i\n  %a")
+  ;; 	("j" "Journal" entry (file+datetree "~/.org/journal.org")
+  ;; 	 "* %?\nEntered on %U\n %i\n %a")))
+
+
+  ;; Set to the location of your Org files on your local system
+  ;; (setq org-directory "~/.org")
+  ;; Set to the name of the file where new notes will be stored
+  ;; (setq org-mobile-inbox-for-pull "~/.org/flagged.org")
+  ;; Set to <your Dropbox root directory>/MobileOrg.
+  ;; (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
+
+  ;; define default agenda files
+  ;; (setq org-agenda-files (list "~/.org/gtd.org"
+  ;; 			     "~/.org/journal.org"
+  ;; 			     "~/.org/first.org"))
+
+  ;; Enable transient mark mode
+  ;; (transient-mark-mode 1)
+
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
