@@ -312,8 +312,13 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; (setq powerline-default-separator 'utf-8)
 
+  ;; Enable line number 
   (global-display-line-numbers-mode t)
+
+  ;; adjust numbers padding based on biggest number
   (setq display-line-numbers-width-start t)
+
+  ;; Define python interpreter address and version
   (setq python-shell-interpreter "/usr/local/Cellar/python/3.7.0/bin/python3")
   (setq elpy-rpc-python-command "python3")
 
