@@ -314,6 +314,9 @@ you should place your code here."
 
   (global-display-line-numbers-mode t)
   (setq display-line-numbers-width-start t)
+  (setq python-shell-interpreter "/usr/local/Cellar/python/3.7.0/bin/python3")
+  (setq elpy-rpc-python-command "python3")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ORG Mode;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'org)
